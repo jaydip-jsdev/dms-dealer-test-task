@@ -1,0 +1,33 @@
+.subscription-container {
+  background-color: #ffff;
+  margin: 15px;
+  padding: 16px;
+}
+
+.subscription-form {
+  width: 218px;
+
+  .subscription-form-select {
+    width: 100%;
+  }
+}
+
+.datepicker {
+  width: 100%;
+}
+
+.subscription-title-container {
+  margin-top: 10px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  .subscription-searchbar {
+    width: 264px;
+  }
+
+  .subscription-tools-container {
+    width: 200px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+}

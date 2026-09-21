@@ -1,0 +1,38 @@
+.section-title {
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.column {
+  flex: 1;
+}
+
+.field-wrapper {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 12px;
+
+  .ant-form-item{
+    margin-bottom: 0;
+  }
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-05 {
+  flex: 0.5;
+}
+
+.flex-2 {
+  flex: 2;
+}
+
+.full-width {
+  margin-bottom: 12px;
+}
+
+.checkbox-field {
+  margin-top: 8px;
+}

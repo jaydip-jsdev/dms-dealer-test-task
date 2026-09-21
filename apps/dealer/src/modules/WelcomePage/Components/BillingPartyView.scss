@@ -1,0 +1,183 @@
+.billing-party-view-container {
+  width: 100%;
+  padding: 0;
+
+  .billing-party-header {
+    margin-bottom: 24px;
+    width: 100%;
+  }
+
+  .billing-party-cards {
+    width: 100%;
+
+    .billing-party-card {
+      min-width: 425px;
+      background-color: #ffffff;
+
+      .ant-card-body{
+        padding: 20px;
+      }
+
+      .billing-party-card-header {
+        margin-bottom: 16px;
+        align-items: flex-start;
+
+        .billing-party-company-name {
+          margin: 0;
+          font-size: 18px;
+          font-weight: 600;
+          color: #333333;
+        }
+
+        .billing-party-request-approval {
+          font-size: 14px;
+          color: #F8285A;
+          cursor: pointer;
+          font-weight: 500;
+          text-decoration: underline;
+        }
+
+        .billing-party-more-icon {
+          color: #666666;
+          cursor: pointer;
+          font-size: 16px;
+        }
+      }
+
+      .billing-party-mobile-section {
+        margin-bottom: 16px;
+
+        .billing-party-mobile {
+          font-size: 14px;
+          color: #333333;
+        }
+
+        .billing-party-status {
+          font-size: 14px;
+          font-weight: 500;
+          padding: 1px 8px;
+
+          &.active {
+            color: var(--status-active-text);
+            background-color: var(--status-active-bg);
+            border: 1px solid var(--status-active-border);
+            border-radius: 2px;
+          }
+
+          &.inactive {
+            color: var(--status-inactive-text);
+            background-color: var(--status-inactive-bg);
+            border: 1px solid var(--status-inactive-border);
+            border-radius: 2px;
+          }
+        }
+
+        .ant-switch-checked {
+          background-color: var(--brand-primary-color);
+        }
+      }
+
+      .billing-party-details {
+        margin-bottom: 16px;
+
+        .billing-party-detail-card {
+          flex: 1;
+          background-color: #ffffff;
+          border-radius: 0;
+          border: 1px solid var(--border-muted-color);
+          padding: 12px;
+
+          .billing-party-detail-label {
+            font-size: 12px;
+            color: var(--muted-text-color);
+            margin-bottom: 4px;
+          }
+
+          .billing-party-detail-value {
+            font-size: 14px;
+            color: #333333;
+            font-weight: 500;
+          }
+        }
+      }
+
+      .billing-party-system-checks {
+        margin-bottom: 16px;
+        padding: 12px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+
+        .billing-party-system-check-item {
+          .status-icon {
+            font-size: 16px;
+
+            &.approved {
+              color: var(--status-approved);
+            }
+
+            &.rejected {
+              color: var(--status-rejected);
+            }
+
+            &.pending {
+              color: var(--status-pending);
+            }
+          }
+
+          .billing-party-system-check-name {
+            font-size: 14px;
+            color: #333333;
+          }
+        }
+      }
+
+        .billing-party-see-more {
+        font-size: 14px;
+        color: var(--brand-primary-color);
+        cursor: pointer;
+        font-weight: 500;
+        text-align: center;
+        display: block;
+        margin-top: 8px;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .billing-party-card {
+    width: calc(50% - 8px);
+    padding: 16px;
+  }
+
+  @media (max-width: 768px) {
+    .billing-party-card {
+      width: 100%;
+    }
+  }
+}
+.ant-modal-title{
+  font-size: 20px;
+}
+
+.add-billing-party-modal {
+  .ant-modal-body {
+    padding-top: 12px;
+  }
+}
+
+.confirm-modal {
+  .ant-modal-body {
+    font-weight: 500;
+  }
+}
+.request-approval-modal {
+  .ant-modal-body {
+    padding-top: 8px;
+  }
+
+  .request-approval-link {
+    color: var(--brand-primary-color);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}

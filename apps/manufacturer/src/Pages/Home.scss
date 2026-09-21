@@ -1,0 +1,29 @@
+.sidebar-container {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.sidebar-container::-webkit-scrollbar {
+  display: none;
+}
+
+.app-main-container::-webkit-scrollbar {
+  display: none;
+}
+
+.app-main-container {
+  flex: 1;
+  background-color: #FEF6F6;
+  height: 100vh;
+  overflow: auto;
+}
+
+.global-card-content {
+  border-radius: 0;
+  overflow: hidden;
+  margin-top: 120px;
+}
+
+.global-card-content::-webkit-scrollbar {
+  display: none;
+}

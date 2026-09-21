@@ -1,0 +1,17 @@
+.order-list-container{
+    margin: 15px;
+    padding: 16px;
+    background-color: #fff;
+    .header-container{
+        flex-wrap: wrap;
+        margin-top: 10px;
+        justify-content: space-between;
+        .search-order-field{
+            width: 264px;
+        }
+    }
+    .checkbox-container{
+        flex-wrap: wrap;
+        margin: 20px 0px;
+    }
+}

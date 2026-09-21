@@ -1,0 +1,13 @@
+.item-list-container{
+    background-color: #fff;
+    margin: 15px;
+    padding: 16px;
+    .item-list-header{
+        margin: 10px 0px 20px 0px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        .item-list-search{
+            width: 264px;
+        }
+    }
+}

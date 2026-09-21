@@ -1,0 +1,45 @@
+{
+  "name": "DMS-MONO-FE",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "turbo run build",
+    "start": "turbo run dev",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint -- --fix",
+    "start:dealer": "pnpm --filter @apps/dealer dev",
+    "start:manufacturer": "pnpm --filter @apps/manufacturer dev",
+    "preview:dealer": "pnpm --filter @apps/dealer preview",
+    "preview:manufacturer": "pnpm --filter @apps/manufacturer preview",
+    "build:dealer": "pnpm --filter @apps/dealer build",
+    "build:manufacturer": "pnpm --filter @apps/manufacturer build",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,css,scss,html}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,css,scss,html}\"",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.7.4",
+    "prettier-plugin-organize-imports": "^4.3.0",
+    "turbo": "^2.7.3",
+    "typescript": "5.9.2"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,css}": [
+      "prettier --write"
+    ]
+  },
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.19",
+    "react-router-dom": "7.7.1"
+  }
+}

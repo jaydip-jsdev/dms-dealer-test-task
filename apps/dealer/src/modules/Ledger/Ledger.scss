@@ -1,0 +1,27 @@
+.ledger-container {
+  padding: 16px;
+  background: var(--ant-color-bg-base);
+  margin: 16px;
+}
+
+.ledger-party-info {
+  border: 1px solid var(--border-muted-color);
+
+  .info-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border-muted-color);
+    font-weight: 600;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.ledger-remark-toggle {
+  margin: 8px 0 12px 0;
+}
+
+

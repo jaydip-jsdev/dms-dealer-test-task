@@ -1,0 +1,31 @@
+* {
+  padding: 0%;
+  margin: 0%;
+  box-sizing: border-box;
+}
+
+:root {
+  --page-bg-color: #fef6f6;
+  --brand-primary-color: #f8285a;
+  --border-muted-color: #d9d9d9;
+  --muted-text-color: #999999;
+  --status-active-text: #52c41a;
+  --status-active-bg: #f6ffed;
+  --status-active-border: #52c41a;
+  --status-inactive-text: #ff4d4f;
+  --status-inactive-bg: #fff1f0;
+  --status-inactive-border: #ff4d4f;
+  --status-approved: #52c41a;
+  --status-rejected: #ff4d4f;
+  --status-pending: #1890ff;
+  --card-text-color: #00000073;
+  --table-sub-header-color: #ffeef3;
+  --table-sub-row-color: #fef9fb;
+  --border-color: #f0f0f0;
+}
+
+.main-container {
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}

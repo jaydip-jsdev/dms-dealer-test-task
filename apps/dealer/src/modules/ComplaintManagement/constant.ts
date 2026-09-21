@@ -1,0 +1,58 @@
+import type { ActionLogItem } from "@repo/ui";
+
+export const actionLogsData: ActionLogItem[] = [
+  {
+    id: 1,
+    complaintId: 101,
+    followUpDate: "2025-05-24",
+    followUpBy: "Divyesh",
+    contactPerson: "Rahul Patel",
+    description:
+      "Customer called regarding order status. Advised to wait for delivery",
+    isVisited: true,
+    visitedDate: "2025-05-25",
+    visitDescription:
+      "Visited customer and resolved the issue with replacement product",
+    createdAt: "2025-05-24",
+    updatedAt: "2025-05-24",
+    isClosingEntry: true,
+    closingRemark: "Issue resolved with product replacement",
+    closingDate: "2025-05-26",
+    closingBy: "Rohan Patel",
+  },
+  {
+    id: 2,
+    complaintId: 102,
+    followUpDate: "2025-05-22",
+    followUpBy: "Priya",
+    contactPerson: "Ronak Patel",
+    description:
+      "Follow up on broken product complaint. Customer confirmed receipt of replacement",
+    isVisited: true,
+    visitedDate: "2025-05-23",
+    visitDescription: "Verified replacement product quality with customer",
+    createdAt: "2025-05-22",
+    updatedAt: "2025-05-22",
+    isClosingEntry: true,
+    closingRemark: "Replacement product accepted by customer",
+    closingDate: "2025-05-24",
+    closingBy: "Suresh Kumar",
+  },
+  {
+    id: 3,
+    complaintId: 103,
+    followUpDate: "2025-05-20",
+    followUpBy: "Ajay",
+    contactPerson: "Chintan Sharma",
+    description: "Initial follow-up on order delivery status",
+    isVisited: false,
+    visitedDate: "2025-05-21",
+    visitDescription: "Phone call discussion for order details",
+    createdAt: "2025-05-20",
+    updatedAt: "2025-05-20",
+    isClosingEntry: true,
+    closingRemark: "Order delivered and complaint closed",
+    closingDate: "2025-05-22",
+    closingBy: "Rajesh Verma",
+  },
+];

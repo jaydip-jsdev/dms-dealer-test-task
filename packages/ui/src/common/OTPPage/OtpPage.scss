@@ -1,0 +1,29 @@
+.otp-page-section{
+    .otp-page-title{
+        .otp-title-discription{
+            text-align: center;
+        }
+    }
+    .form-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .inactive-resend-otp{
+            color: #A2A2A2;
+            cursor: not-allowed;
+        }
+        .active-resend-otp{
+            color: #F8285A;
+            cursor: pointer;
+        }
+        .otp-submit-btn{
+            margin-top: 48px;
+            width: 100%;
+        }
+        .ant-statistic-content-value{
+            font-size: 12px;
+            font-weight: 50px;
+            color: #F8285A;
+        }
+    }
+}

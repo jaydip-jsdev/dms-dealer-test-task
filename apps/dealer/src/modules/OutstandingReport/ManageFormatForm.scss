@@ -1,0 +1,82 @@
+.manage-format-modal {
+  .step-indicator {
+    margin-bottom: 24px;
+    padding: 8px 50px 0;
+  }
+
+  .step-track {
+    position: relative;
+    height: 3px;
+    background-color: #ffd3de;
+    border-radius: 999px;
+
+    &.completed {
+      background-color: #ff2d62;
+    }
+
+    .step-dot {
+      position: absolute;
+      top: 50%;
+      width: 10px;
+      height: 10px;
+      background-color: #ff2d62;
+      border-radius: 50%;
+      transform: translateY(-50%);
+    }
+
+    .left {
+      left: 0;
+      transform: translate(-50%, -50%);
+    }
+
+    .right {
+      right: 0;
+      transform: translate(50%, -50%);
+    }
+  }
+
+  .step-labels {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+
+    .ant-typography {
+      color: #262626;
+    }
+
+    .active {
+      font-weight: 600;
+    }
+  }
+
+  .format-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .format-select {
+    margin-bottom: 16px;
+    width: 100%;
+  }
+
+  .format-input {
+    margin-bottom: 16px;
+    margin-top: 16px;
+  }
+
+  .checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px 8px;
+    margin-bottom: 24px;
+  }
+
+  .group-by-checkbox {
+    margin-top: 20px;
+  }
+
+  .button-group {
+    margin-top: 24px;
+  }
+}

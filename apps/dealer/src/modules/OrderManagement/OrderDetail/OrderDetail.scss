@@ -1,0 +1,36 @@
+.order-detail-container {
+  padding: 16px;
+  .ant-card .ant-card-body {
+    padding: 20px;
+  }
+}
+
+.order-detail-card {
+  border-radius: 8px;
+  .order-header {
+    display: flex;
+    align-items: center;
+    .order-title {
+      font-size: 20px;
+      font-weight: 600;
+    }
+    .back-icon {
+      font-size: 16px;
+    }
+  }
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--border-color);
+  border-left: 1px solid var(--border-color);
+}
+
+.detail-item {
+  padding: 12px 16px;
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+}

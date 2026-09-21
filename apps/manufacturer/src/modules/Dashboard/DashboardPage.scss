@@ -1,0 +1,38 @@
+.dashboard-container {
+  margin: 15px;
+  padding: 16px;
+  background-color: #fff;
+  .header-container {
+    margin-bottom: 10px;
+    .search-order-field {
+      width: 264px;
+    }
+  }
+}
+
+.dashboard-box {
+  margin-bottom: 30px;
+}
+
+.dashboard-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  padding: 20px;
+
+  .card-content {
+    margin-top: 8px;
+  }
+}
+
+.stat-box {
+  border: 1px solid var(--border-muted-color);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+
+  .value {
+    font-size: 22px;
+    font-weight: 600;
+  }
+}

@@ -1,0 +1,16 @@
+* {
+  padding: 0%;
+  margin: 0%;
+  box-sizing: border-box;
+}
+
+:root {
+  --card-text-color: #00000073;
+  --border-muted-color: #d9d9d9;
+}
+
+.main-container {
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}

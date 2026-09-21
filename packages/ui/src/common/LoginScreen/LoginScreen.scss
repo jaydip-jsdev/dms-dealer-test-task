@@ -1,0 +1,35 @@
+.login-section {
+  .login-title {
+    gap: 8px;
+  }
+  @media screen and (max-width: 785px) {
+    padding: 0;
+  }
+  .form-section {
+    .login-by {
+      width: 100%;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    .password-field {
+      margin-bottom: 0;
+    }
+    .forgot-password {
+      position: absolute;
+      right: 0;
+      margin-top: 5px;
+      top: 100%;
+    }
+    .login-button {
+      margin-top: 48px !important;
+      gap: 16px;
+    }
+    .mobile-row-section {
+      margin-bottom: 24px;
+    }
+  }
+}
+
+.ant-modal-footer {
+  margin-top: 60px !important;
+}

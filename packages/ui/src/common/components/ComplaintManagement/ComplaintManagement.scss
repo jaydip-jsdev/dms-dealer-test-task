@@ -1,0 +1,14 @@
+.complaint-list-container {
+  margin: 16px;
+  padding: 16px;
+  background-color: #ffffff;
+  .complaint-list-title {
+    margin: 10px 0 20px;
+    .complaint-list-search {
+      width: 264px;
+    }
+  }
+  .ant-table-wrapper {
+    margin-top: 20px;
+  }
+}

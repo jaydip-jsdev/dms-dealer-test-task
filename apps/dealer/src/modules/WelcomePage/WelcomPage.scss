@@ -1,0 +1,39 @@
+.welcome-page-container {
+  min-height: 100vh;
+  padding: 34px;
+  width: 90%;
+  margin: 0 auto;
+
+  .welcome-tabs {
+    margin-bottom: 24px;
+
+    .ant-tabs-nav {
+      margin-bottom: 0;
+      border-bottom: none;
+    }
+
+    .ant-tabs-tab {
+      padding: 8px 26px;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--muted-text-color);
+      border: 1px solid var(--border-muted-color);
+      background-color: #ffffff;
+      transition: all 0.2s ease;
+      margin: 0;
+
+      &:hover {
+        color: var(--brand-primary-color);
+        border-color: var(--brand-primary-color);
+      }
+    }
+
+    .ant-tabs-ink-bar {
+      display: none;
+    }
+  }
+}
+.welcome-tabs .ant-tabs-tab.ant-tabs-tab-active {
+  color: var(--brand-primary-color);
+  border-color: var(--brand-primary-color);
+}

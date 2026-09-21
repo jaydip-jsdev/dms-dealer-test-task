@@ -1,0 +1,141 @@
+import type { TableProps } from "antd";
+
+import type { PriceListDataType } from "../../types";
+
+export const priceTableColumn: TableProps["columns"] = [
+  {
+    title: "Sr. No.",
+    dataIndex: "sr_no",
+    width: 73,
+  },
+  {
+    title: "Item Name",
+    dataIndex: "item_name",
+    width: 179,
+  },
+  {
+    title: "Sub Grade Name",
+    children: [
+      {
+        title: "1ST",
+        children: [
+          { title: "A1", dataIndex: "a1" },
+          { title: "A2", dataIndex: "a2" },
+          { title: "A3", dataIndex: "a3" },
+          { title: "A4", dataIndex: "a4" },
+        ],
+      },
+      {
+        title: "PQ",
+        children: [{ title: "PQ", dataIndex: "pq" }],
+      },
+      {
+        title: "CLQ",
+        children: [{ title: "CLQ", dataIndex: "clq" }],
+      },
+    ],
+  },
+];
+
+export const priceTableData: PriceListDataType[] = [
+  {
+    sr_no: 1,
+    item_name: "A",
+    a1: 400,
+    a2: 200,
+    a3: 100,
+    a4: 100,
+    pq: 90,
+    clq: "AB",
+  },
+  {
+    sr_no: 2,
+    item_name: "B",
+    a1: 300,
+    a2: 200,
+    a3: 100,
+    a4: 100,
+    pq: 90,
+    clq: "AB",
+  },
+  {
+    sr_no: 3,
+    item_name: "C",
+    a1: 500,
+    a2: 200,
+    a3: 100,
+    a4: 100,
+    pq: 90,
+    clq: "AB",
+  },
+  {
+    sr_no: 4,
+    item_name: "D",
+    a1: 500,
+    a2: 200,
+    a3: 100,
+    a4: 100,
+    pq: 90,
+    clq: "AB",
+  },
+  {
+    sr_no: 5,
+    item_name: "E",
+    a1: 400,
+    a2: 200,
+    a3: 100,
+    a4: 100,
+    pq: 90,
+    clq: "AB",
+  },
+  {
+    sr_no: 6,
+    item_name: "F",
+    a1: 300,
+    a2: 200,
+    a3: 100,
+    a4: 100,
+    pq: 90,
+    clq: "AB",
+  },
+  {
+    sr_no: 7,
+    item_name: "G",
+    a1: 300,
+    a2: 200,
+    a3: 100,
+    a4: 100,
+    pq: 90,
+    clq: "AB",
+  },
+  {
+    sr_no: 8,
+    item_name: "H",
+    a1: 300,
+    a2: 200,
+    a3: 100,
+    a4: 100,
+    pq: 90,
+    clq: "AB",
+  },
+  {
+    sr_no: 9,
+    item_name: "I",
+    a1: 400,
+    a2: 200,
+    a3: 100,
+    a4: 100,
+    pq: 90,
+    clq: "AB",
+  },
+  {
+    sr_no: 10,
+    item_name: "J",
+    a1: 200,
+    a2: 200,
+    a3: 100,
+    a4: 100,
+    pq: 90,
+    clq: "AB",
+  },
+];

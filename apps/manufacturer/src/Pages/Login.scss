@@ -1,0 +1,65 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow-y: auto;
+  background-color: #ffecf1;
+}
+
+.login-page {
+  width: 82%;
+  border-radius: 30px;
+  gap: 30px;
+  position: relative;
+  background-color: #ffffff;
+  min-height: 738px;
+
+  .login-page-logo-section {
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    width: 50%;
+    @media screen and (max-width: 785px) {
+      width: 100%;
+    }
+  }
+  @media screen and (max-width: 785px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    min-height: 0;
+    padding: 20px;
+    overflow-y: scroll;
+    .login-page-logo-section,
+    .auth-page-form-section {
+      width: 100%;
+    }
+  }
+
+  .login-page-logo-section {
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    width: 50%;
+  }
+
+  .login-page-form-section {
+    justify-content: center;
+    width: 350px;
+    display: flex;
+    @media screen and (max-width: 785px) {
+      max-width: 320px;
+    }
+    @media screen and (min-width: 480px) and (max-width: 785px) {
+      max-width: 320px;
+    }
+    @media screen and (min-width: 785px) and (max-width: 1050px) {
+      max-width: 270px;
+    }
+    @media screen and (min-width: 1460px) {
+      max-width: 350px;
+    }
+  }
+}

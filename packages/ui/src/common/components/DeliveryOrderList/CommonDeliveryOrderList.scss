@@ -1,0 +1,15 @@
+.deliveryorder-container {
+  background-color: #ffff;
+  margin: 15px;
+  padding: 16px;
+}
+.delivery-title-container {
+  justify-content: space-between;
+  flex-wrap: wrap;
+  .delivery-searchbar {
+    width: 264px;
+  }
+  .delivery-tools-container {
+    flex-wrap: wrap;
+  }
+}

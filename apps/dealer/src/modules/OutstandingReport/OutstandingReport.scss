@@ -1,0 +1,53 @@
+.outstanding-container {
+  padding: 16px;
+  background: var(--ant-color-bg-base);
+  margin: 16px;
+}
+
+.outstanding-party-info {
+  border: 1px solid var(--border-color);
+
+  .info-row {
+    display: flex;
+    gap: 26px;
+    padding: 10px 12px;
+    font-weight: 600;
+  }
+}
+
+.outstanding-box {
+  width: 50%;
+  margin-bottom: 10px;
+  .ant-card-body {
+    padding: 10px 30px;
+  }
+}
+
+.box-value {
+  font-weight: 500;
+  font-size: 30px;
+}
+
+
+.manage-format-modal {
+  .step-indicator {
+    margin-bottom: 24px;
+    padding: 8px 0;
+
+    .active {
+      color: #ff4d6d;
+    }
+  }
+
+  .format-input {
+    margin-bottom: 16px;
+  }
+
+  .checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px 8px;
+    margin-bottom: 24px;
+  }
+}
+  

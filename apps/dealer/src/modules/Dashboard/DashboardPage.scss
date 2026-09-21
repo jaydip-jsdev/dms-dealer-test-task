@@ -1,0 +1,114 @@
+.dashboard-container {
+  padding: 16px;
+  margin: 16px;
+
+  background-color: #ffffff;
+  min-height: 100vh;
+}
+
+.dashboard-header {
+  margin-bottom: 24px;
+}
+
+.summary-cards-row {
+  margin-bottom: 24px;
+}
+
+.summary-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dashboard-card {
+  flex: 1;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  border: 1px solid var(--border-color);
+    margin-bottom: 16px;
+
+
+  .ant-card-body {
+    padding: 16px;
+  }
+
+  .card-title {
+    font-size: 14px;
+    font-weight: 600;
+  }
+}
+
+.stat-box {
+  border: 1px solid var(--card-text-color);
+  border-radius: 6px;
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  
+
+  .label {
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+
+  .value {
+    font-size: 22px;
+    font-weight: 600;
+  }
+}
+
+.do-card {
+  border: none;
+
+  .do-content {
+    margin-top: 8px;
+  }
+
+  .do-stat-box {
+    padding: 12px 8px;
+    flex-direction: column;
+    min-height: 60px;
+  }
+}
+
+.table-header {
+  margin: 24px 0 16px 10px;
+}
+
+.sales-header-row {
+  .sales-header {
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+}
+
+.do-metric-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.do-metric-box {
+  border: 1px solid var(--card-text-color);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.do-value {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.do-summary {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  border: 1px solid var(--border-color);
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.do-last-row {
+  margin-top: 10px;
+}

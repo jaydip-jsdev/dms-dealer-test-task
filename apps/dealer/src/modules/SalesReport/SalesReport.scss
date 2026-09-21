@@ -1,0 +1,42 @@
+.sales-container {
+  padding: 16px;
+  background: var(--ant-color-bg-base);
+  margin: 16px;
+}
+
+.sales-box {
+  width: 50%;
+  margin-bottom: 10px;
+  .ant-card-body {
+    padding: 10px 30px;
+  }
+}
+
+.ant-table-wrapper tr.ant-table-expanded-row >td {
+  padding: 0;
+}
+
+.box-value {
+  font-weight: 500;
+  font-size: 30px;
+}
+
+.expand-box {
+  height: 16px;
+  min-width: 16px;
+  padding: 0;
+  border: 1px solid var(--brand-primary-color);
+  display: inline-flex;
+  align-items: center;  
+  justify-content: center;
+  font-size: 12px;
+}
+
+.expanded-wrapper {
+  .ant-table-thead > tr > th {
+    background-color: var(--table-sub-header-color);
+  }
+  .ant-table-tbody > tr > td {
+    background-color: var(--table-sub-row-color);
+  }
+}

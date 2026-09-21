@@ -1,0 +1,31 @@
+.collapse-container {
+  margin-top: 20px;
+
+  .ant-collapse-content-box {
+    display: flex;
+    flex-direction: column;
+  }
+}
+.title {
+  font-size: 14px;
+  color: #6b7280;
+}
+.text {
+  font-size: 12px;
+}
+.card-container {
+  margin-top: 10px;
+}
+.ant-card {
+  width: 100%;
+  .ant-card-body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .sub-card-container {
+      padding: 10px;
+      width: 70%;
+    }
+  }
+}
