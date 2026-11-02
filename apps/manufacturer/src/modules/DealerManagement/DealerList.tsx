@@ -26,6 +26,7 @@ import type {
   DealerUpdateStatusPayload,
 } from "../../types";
 
+import { AddDealerModal } from "./DealerTable/DealerActions";
 import Dealertable from "./DealerTable/Dealertable";
 
 const DealerList = () => {
@@ -40,7 +41,7 @@ const DealerList = () => {
 
   const [pagination, setPagination] = useState<TablePaginationConfig>({
     current: 1,
-    pageSize: 2,
+    pageSize: 10,
     total: 0,
   });
   const { current = 1, pageSize = 10 } = pagination;
@@ -140,7 +141,10 @@ const DealerList = () => {
               className="select-btn-field"
               placeholder="Select Status"
               value={Filter || undefined}
-              onChange={(value: string) => setFilter(value)}
+              onChange={(value: string) => {
+                setFilter(value);
+                setPagination((prev) => ({ ...prev, current: 1 }));
+              }}
               options={[
                 { label: "All", value: "all" },
                 { label: "Pending", value: "pending" },
@@ -193,8 +197,11 @@ const DealerList = () => {
         loadData={loadData}
         handleUpdateStatus={handleUpdateStatus}
         selectedValue={selectedValue}
-        Addbtn={Addbtn}
-        setAddbtn={setAddbtn}
+      />
+      <AddDealerModal
+        open={Addbtn}
+        setOpen={setAddbtn}
+        onAdded={() => loadData(current, pageSize, searchText, Filter ?? "")}
       />
     </Flex>
   );

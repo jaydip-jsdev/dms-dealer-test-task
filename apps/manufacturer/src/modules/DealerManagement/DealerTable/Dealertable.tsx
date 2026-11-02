@@ -7,8 +7,6 @@ import { DealerAction } from "./DealerActions";
 
 interface DealerListTableProp extends TableCompoProps<DealerManagementData> {
   selectedValue: string[];
-  Addbtn: boolean;
-  setAddbtn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const Dealertable = ({
   data,
@@ -17,8 +15,6 @@ const Dealertable = ({
   handleTableChange,
   handleUpdateStatus,
   selectedValue,
-  Addbtn,
-  setAddbtn,
 }: DealerListTableProp) => {
   const current = pagination.current ?? 1;
   const pageSize = pagination.pageSize ?? 10;
@@ -101,12 +97,7 @@ const Dealertable = ({
       title: "Action",
       key: "action",
       render: (_, record: DealerManagementData) => (
-        <DealerAction
-          record={record}
-          handleUpdateStatus={handleUpdateStatus}
-          Addbtn={Addbtn}
-          setAddbtn={setAddbtn}
-        />
+        <DealerAction record={record} handleUpdateStatus={handleUpdateStatus} />
       ),
     },
   ];

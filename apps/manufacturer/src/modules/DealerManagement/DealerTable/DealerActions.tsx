@@ -1,14 +1,16 @@
 import { MoreOutlined } from "@ant-design/icons";
+import type { ApiErrorResponse } from "@repo/ui";
 import {
   Button,
-  message,
-  Form,
   Dropdown,
+  Form,
   Input,
+  message,
   Modal,
   type MenuProps,
 } from "antd";
-import { useState } from "react";
+import type { AxiosError } from "axios";
+import { useRef, useState } from "react";
 
 import { addDealer } from "../../../api/services/dealerService";
 import type {
@@ -26,43 +28,204 @@ interface DealerActionProps {
     id: number,
     payload: DealerUpdateStatusPayload,
   ) => Promise<boolean>;
-  Addbtn: boolean;
-  setAddbtn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 interface ModaltypesProps {
   isModalOpen: modalType;
   handleOk: () => void;
   handleCancel: () => void;
+  confirmLoading: boolean;
 }
 
 export const Modaltypes = ({
   isModalOpen,
   handleOk,
   handleCancel,
+  confirmLoading,
 }: ModaltypesProps) => {
+  const statusVerb: Record<string, string> = {
+    approved: "approve",
+    rejected: "reject",
+    blacklisted: "blacklist",
+  };
+
   return (
     <Modal
       open={isModalOpen.isVisible}
-      title={`Are you sure you want to ${isModalOpen.status} Dealer?`}
+      title={`Are you sure you want to ${
+        statusVerb[isModalOpen.status] ?? isModalOpen.status
+      } Dealer?`}
       onOk={handleOk}
       onCancel={handleCancel}
       closable={false}
-    ></Modal>
+      confirmLoading={confirmLoading}
+    />
+  );
+};
+
+interface AddDealerModalProps {
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  onAdded: () => Promise<void>;
+}
+
+export const AddDealerModal = ({
+  open,
+  setOpen,
+  onAdded,
+}: AddDealerModalProps) => {
+  const [form] = Form.useForm<DealerBase>();
+  const [submitting, setSubmitting] = useState(false);
+  const submittingRef = useRef(false);
+
+  const handleSubmit = async (values: DealerBase) => {
+    if (submittingRef.current) return;
+
+    submittingRef.current = true;
+    setSubmitting(true);
+
+    try {
+      const userDetails = JSON.parse(
+        localStorage.getItem("userDetails") || "{}",
+      ) as { manufacturerCode?: unknown };
+      const manufacturerCode =
+        typeof userDetails.manufacturerCode === "string"
+          ? userDetails.manufacturerCode.trim()
+          : "";
+
+      if (!manufacturerCode) {
+        message.error("Manufacturer code is missing");
+        return;
+      }
+
+      await addDealer({
+        ...values,
+        manufacturerCode,
+        isActive: true,
+      });
+
+      form.resetFields();
+      setOpen(false);
+      await onAdded();
+      message.success("Dealer added successfully");
+    } catch (error) {
+      const apiError = error as AxiosError<ApiErrorResponse>;
+      message.error(apiError.response?.data.message ?? apiError.message);
+    } finally {
+      submittingRef.current = false;
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <Modal
+      open={open}
+      title={
+        <span style={{ fontSize: "20px", fontWeight: 500 }}>Add Dealer</span>
+      }
+      onCancel={() => setOpen(false)}
+      footer={[
+        <Button
+          type="primary"
+          key="submit"
+          htmlType="submit"
+          form="add-dealer-form"
+          loading={submitting}
+          disabled={submitting}
+        >
+          Submit
+        </Button>,
+      ]}
+    >
+      <Form
+        id="add-dealer-form"
+        form={form}
+        layout="vertical"
+        onFinish={handleSubmit}
+        style={{ fontSize: "14px", fontWeight: 400 }}
+      >
+        <Form.Item
+          label="Dealer Name"
+          name="dealerName"
+          rules={AddDealerRules.dealerName}
+        >
+          <Input placeholder="Enter Dealer Name" />
+        </Form.Item>
+
+        <Form.Item
+          label="GST No."
+          name="gstNumber"
+          rules={AddDealerRules.gstNumber}
+        >
+          <Input placeholder="Enter GST Number" maxLength={15} />
+        </Form.Item>
+
+        <Form.Item
+          label="Address"
+          name="address"
+          rules={AddDealerRules.address}
+        >
+          <Input placeholder="Enter Address" />
+        </Form.Item>
+
+        <Form.Item
+          label="Mobile No."
+          name="mobileNumber"
+          rules={AddDealerRules.mobileNumber}
+        >
+          <Input placeholder="Enter Mobile Number" maxLength={10} />
+        </Form.Item>
+
+        <Form.Item
+          label="Contact Person"
+          name="contactPerson"
+          rules={AddDealerRules.contactPerson}
+        >
+          <Input placeholder="Enter Contact Person" />
+        </Form.Item>
+        <h5
+          style={{ paddingBottom: "15px", fontSize: "16px", fontWeight: 500 }}
+        >
+          login Info
+        </h5>
+        <Form.Item
+          label="WhatsApp No."
+          name="whatsappNumber"
+          rules={AddDealerRules.whatsappNumber}
+        >
+          <Input placeholder="Enter WhatsApp Number" maxLength={10} />
+        </Form.Item>
+
+        <Form.Item
+          label="Login Email"
+          name="email"
+          rules={AddDealerRules.loginEmail}
+        >
+          <Input placeholder="Enter Login Email" />
+        </Form.Item>
+
+        <Form.Item
+          label="Login Password"
+          name="password"
+          rules={AddDealerRules.loginPassword}
+        >
+          <Input.Password placeholder="Enter Login Password" />
+        </Form.Item>
+      </Form>
+    </Modal>
   );
 };
 
 export const DealerAction = ({
   record,
   handleUpdateStatus,
-  Addbtn,
-  setAddbtn,
 }: DealerActionProps) => {
-  const [form] = Form.useForm<DealerBase>();
   const [modalData, setModalData] = useState<modalType>({
     isVisible: false,
     status: "",
   });
   const [permissionModalOpen, setPermissionModalOpen] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false);
+  const statusRequestRef = useRef(false);
   const ActionMenuItem: MenuProps["items"] = [
     ...(record.status === "approved"
       ? [
@@ -96,8 +259,10 @@ export const DealerAction = ({
   const handleOk = async () => {
     const newStatus = modalData.status;
 
-    if (!newStatus) return;
+    if (!newStatus || statusRequestRef.current) return;
 
+    statusRequestRef.current = true;
+    setConfirmLoading(true);
     try {
       const success = await handleUpdateStatus(record.id, {
         status: newStatus,
@@ -110,7 +275,11 @@ export const DealerAction = ({
         });
       }
     } catch (error) {
-      console.error("dealeraction-failed:", error);
+      const apiError = error as AxiosError<ApiErrorResponse>;
+      message.error(apiError.response?.data.message ?? apiError.message);
+    } finally {
+      statusRequestRef.current = false;
+      setConfirmLoading(false);
     }
   };
   const handleCancel = () => {
@@ -120,26 +289,6 @@ export const DealerAction = ({
     });
   };
 
-  const handleSubmit = async (values: DealerBase) => {
-    try {
-      const userDetails = JSON.parse(
-        localStorage.getItem("userDetails") || "{}",
-      );
-
-      const response = await addDealer({
-        ...values,
-        manufacturerCode: userDetails.manufacturerCode,
-        isActive: true,
-      });
-      console.log("Dealer added successfully:", response);
-
-      message.success("Dealer added successfully");
-      setAddbtn(false);
-    } catch (error) {
-      console.error("Error submitting dealer data:", error);
-      message.error("Failed to add dealer");
-    }
-  };
   return (
     <>
       <Dropdown
@@ -157,6 +306,7 @@ export const DealerAction = ({
         isModalOpen={modalData}
         handleOk={handleOk}
         handleCancel={handleCancel}
+        confirmLoading={confirmLoading}
       />
 
       {/* here it is = for manage permission */}
@@ -167,101 +317,6 @@ export const DealerAction = ({
         onOk={() => setPermissionModalOpen(false)}
       >
         <p>Manage dealer permissions here.</p>
-      </Modal>
-
-      {/* here it is..... ADD-DEALER */}
-      <Modal
-        open={Addbtn}
-        title={
-          <span style={{ fontSize: "20px", fontWeight: 500 }}>Add Dealer</span>
-        }
-        onCancel={() => setAddbtn(false)}
-        footer={[
-          <Button
-            type="primary"
-            key="submit"
-            htmlType="submit"
-            form="add-dealer-form"
-          >
-            Submit
-          </Button>,
-        ]}
-      >
-        <Form
-          id="add-dealer-form"
-          form={form}
-          layout="vertical"
-          onFinish={handleSubmit}
-          style={{ fontSize: "14px", fontWeight: 400 }}
-        >
-          <Form.Item
-            label="Dealer Name"
-            name="dealerName"
-            rules={AddDealerRules.dealerName}
-          >
-            <Input placeholder="Enter Dealer Name" />
-          </Form.Item>
-
-          <Form.Item
-            label="GST No."
-            name="gstNumber"
-            rules={AddDealerRules.gstNumber}
-          >
-            <Input placeholder="Enter GST Number" maxLength={15} />
-          </Form.Item>
-
-          <Form.Item
-            label="Address"
-            name="address"
-            rules={AddDealerRules.address}
-          >
-            <Input placeholder="Enter Address" />
-          </Form.Item>
-
-          <Form.Item
-            label="Mobile No."
-            name="mobileNumber"
-            rules={AddDealerRules.mobileNumber}
-          >
-            <Input placeholder="Enter Mobile Number" maxLength={10} />
-          </Form.Item>
-
-          <Form.Item
-            label="Contact Person"
-            name="contactPerson"
-            rules={AddDealerRules.contactPerson}
-          >
-            <Input placeholder="Enter Contact Person" />
-          </Form.Item>
-          <h5
-            style={{ paddingBottom: "15px", fontSize: "16px", fontWeight: 500 }}
-          >
-            login Info
-          </h5>
-          <Form.Item
-            label="WhatsApp No."
-            name="whatsappNumber"
-            rules={AddDealerRules.whatsappNumber}
-          >
-            <Input placeholder="Enter WhatsApp Number" maxLength={10} />
-          </Form.Item>
-
-          <Form.Item
-            label="Login Email"
-            name="email"
-            rules={AddDealerRules.loginEmail}
-          >
-            <Input placeholder="Enter Login Email" />
-          </Form.Item>
-
-          <Form.Item
-            label="Login Password"
-            name="password"
-            rules={AddDealerRules.loginPassword}
-          >
-            <Input.Password placeholder="Enter Login Password" />
-          </Form.Item>
-        </Form>
       </Modal>
     </>
   );
