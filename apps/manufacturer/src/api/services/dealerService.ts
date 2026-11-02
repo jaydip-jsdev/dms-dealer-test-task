@@ -32,13 +32,14 @@ export const fetchAllDealers = async (
 };
 
 export const updateDealerStatusById = async (
-  id: string,
+  id: number,
   payload: DealerUpdateStatusPayload,
 ): Promise<UpdateDealerStatusResponse> => {
   const { data } = await api.patch<UpdateDealerStatusResponse>(
     `dealers/${id}/status`,
     payload,
   );
+
   return data;
 };
 

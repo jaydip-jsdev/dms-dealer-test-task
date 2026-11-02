@@ -5,6 +5,7 @@ import "./PriceList.scss";
 import PriceTable from "./PriceTable/PriceTable";
 const { Title } = Typography;
 const { Search } = Input;
+
 const PriceList = () => {
   return (
     <Flex className="price-page-container" vertical gap={20}>

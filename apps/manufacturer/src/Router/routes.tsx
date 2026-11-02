@@ -9,6 +9,7 @@ import OrderManagement from "../../../manufacturer/src/modules/OrderManagement.t
 import SubscriptionList from "../../../manufacturer/src/modules/SubscritionManagement/SubscriptionDetails/SubscriptionDetails.tsx";
 import { PATH } from "../../../manufacturer/src/Router/routerPath.ts";
 import Company from "../modules/Company.tsx";
+import DealerManagement from "../modules/DealerManagement.tsx";
 import Design from "../modules/Design.tsx";
 import Grade from "../modules/Grade.tsx";
 import Lot from "../modules/Lot.tsx";
@@ -33,6 +34,10 @@ export const moduleRoutes: Route[] = [
   {
     path: PATH.ITEMMANAGEMENT,
     component: <ItemManagement />,
+  },
+  {
+    path: PATH.DEALERMANAGEMENT,
+    component: <DealerManagement />,
   },
   {
     path: PATH.SUBSCRIPTION,

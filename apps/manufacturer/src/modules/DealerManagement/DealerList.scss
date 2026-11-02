@@ -1,0 +1,40 @@
+.Dealer-list-container {
+  margin: 15px;
+  padding: 16px;
+  height: 100vh;
+  background-color: #fff;
+  .heading {
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .main-container {
+    flex-wrap: wrap;
+
+    margin-top: 10px;
+    height: fit-content;
+    justify-content: space-between;
+    .left-container {
+      .search-order-field {
+        max-width: 264px;
+        height: 32px;
+        font-size: 14px;
+      }
+      .select-btn-field {
+        max-width: 146px;
+        height: 32px;
+        font-size: 14px;
+      }
+    }
+  }
+  .right-container {
+    flex-wrap: wrap;
+    .export-btn {
+      max-width: 97px;
+      height: 32px;
+    }
+    .add-dealer {
+      max-width: 125px;
+      height: 32px;
+    }
+  }
+}
