@@ -98,6 +98,12 @@ const DealerList = () => {
   ): Promise<boolean> => {
     try {
       await updateDealerStatusById(id, payload);
+      await loadData({
+        page: current,
+        limit: pageSize,
+        search: searchText,
+        status: Filter ?? "",
+      });
       message.success("Dealer status updated successfully");
       return true;
     } catch (err: unknown) {
