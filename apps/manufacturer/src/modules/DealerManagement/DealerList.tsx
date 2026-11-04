@@ -13,7 +13,7 @@ import {
   type CheckboxChangeEvent,
   type TablePaginationConfig,
 } from "antd";
-import type { AxiosError } from "axios";
+import { isAxiosError } from "axios";
 import { useCallback, useEffect, useState } from "react";
 
 import {
@@ -26,18 +26,26 @@ import type {
   DealerUpdateStatusPayload,
 } from "../../types";
 
+import { CheckBoxNames, STATUS_OPTIONS } from "./constant";
 import { AddDealerModal } from "./DealerTable/DealerActions";
 import Dealertable from "./DealerTable/Dealertable";
+
+export interface DealerPaginationResponse {
+  page: number;
+  limit: number;
+  search: string;
+  status: string;
+}
 
 const DealerList = () => {
   const { Title } = Typography;
   const { Search } = Input;
   const [Filter, setFilter] = useState<string>();
   const [data, setData] = useState<DealerManagementData[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [searchText, setSearchText] = useState("");
-  const [excelLoading, setExcelLoading] = useState(false);
-  const [Addbtn, setAddbtn] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [searchText, setSearchText] = useState<string>("");
+  const [excelLoading, setExcelLoading] = useState<boolean>(false);
+  const [Addbtn, setAddbtn] = useState<boolean>(false);
 
   const [pagination, setPagination] = useState<TablePaginationConfig>({
     current: 1,
@@ -47,7 +55,7 @@ const DealerList = () => {
   const { current = 1, pageSize = 10 } = pagination;
 
   const loadData = useCallback(
-    async (page: number, limit: number, search: string, status: string) => {
+    async ({ page, limit, search, status }: DealerPaginationResponse) => {
       setLoading(true);
       try {
         const response = await fetchAllDealers({
@@ -56,15 +64,17 @@ const DealerList = () => {
           search,
           status: !status || status === "all" ? undefined : status,
         });
-        setData(response.data);
+        setData(response?.data);
         setPagination((prev) => ({
           ...prev,
           current: page,
-          total: response.meta.total,
+          total: response?.meta?.total,
         }));
-      } catch (err) {
-        const error = err as AxiosError<ApiErrorResponse>;
-        message.error(error.response?.data.message ?? error.message);
+      } catch (err: unknown) {
+        if (isAxiosError<ApiErrorResponse>(err)) {
+          const error = err;
+          message.error(error.response?.data.message ?? error.message);
+        }
       } finally {
         setLoading(false);
       }
@@ -82,21 +92,22 @@ const DealerList = () => {
       pageSize: newPagination.pageSize,
     }));
   };
-  useEffect(() => {
-    loadData(current, pageSize, searchText, Filter ?? "");
-  }, [current, pageSize, searchText, Filter, loadData]);
   const handleUpdateStatus = async (
     id: number,
     payload: DealerUpdateStatusPayload,
   ): Promise<boolean> => {
     try {
       await updateDealerStatusById(id, payload);
-      await loadData(current, pageSize, searchText, Filter ?? "");
       message.success("Dealer status updated successfully");
       return true;
-    } catch (err) {
-      const error = err as AxiosError<ApiErrorResponse>;
-      message.error(error.response?.data.message ?? error.message);
+    } catch (err: unknown) {
+      if (isAxiosError<ApiErrorResponse>(err)) {
+        message.error(err.response?.data?.message ?? err.message);
+      } else if (err instanceof Error) {
+        message.error(err.message);
+      } else {
+        message.error("Something went wrong");
+      }
       return false;
     }
   };
@@ -111,11 +122,15 @@ const DealerList = () => {
         : prev.filter((item) => item !== value),
     );
   };
-  const CheckBoxNames = [
-    { label: "Login Email", value: "email" },
-    { label: "Created At", value: "createdAt" },
-    { label: "Created By", value: "createdBy" },
-  ];
+
+  useEffect(() => {
+    loadData({
+      page: current,
+      limit: pageSize,
+      search: searchText,
+      status: Filter ?? "",
+    });
+  }, [current, pageSize, searchText, Filter, loadData]);
 
   return (
     <Flex className="Dealer-list-container" vertical gap={20}>
@@ -145,13 +160,7 @@ const DealerList = () => {
                 setFilter(value);
                 setPagination((prev) => ({ ...prev, current: 1 }));
               }}
-              options={[
-                { label: "All", value: "all" },
-                { label: "Pending", value: "pending" },
-                { label: "Approved", value: "approved" },
-                { label: "Rejected", value: "rejected" },
-                { label: "Blacklisted", value: "blacklisted" },
-              ]}
+              options={STATUS_OPTIONS}
             />
           </Flex>
         </ConfigProvider>
@@ -194,14 +203,20 @@ const DealerList = () => {
         loading={loading}
         pagination={pagination}
         handleTableChange={handleTableChange}
-        loadData={loadData}
         handleUpdateStatus={handleUpdateStatus}
         selectedValue={selectedValue}
       />
       <AddDealerModal
         open={Addbtn}
         setOpen={setAddbtn}
-        onAdded={() => loadData(current, pageSize, searchText, Filter ?? "")}
+        onAdded={() =>
+          loadData({
+            page: current,
+            limit: pageSize,
+            search: searchText,
+            status: Filter ?? "",
+          })
+        }
       />
     </Flex>
   );

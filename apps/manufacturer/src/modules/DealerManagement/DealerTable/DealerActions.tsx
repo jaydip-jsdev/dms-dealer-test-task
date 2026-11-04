@@ -1,5 +1,6 @@
 import { MoreOutlined } from "@ant-design/icons";
 import type { ApiErrorResponse } from "@repo/ui";
+import "./DealerTable.scss";
 import {
   Button,
   Dropdown,
@@ -19,6 +20,7 @@ import type {
   DealerUpdateStatusPayload,
   modalType,
 } from "../../../types";
+import { statusVerb } from "../constant";
 
 import { AddDealerRules } from "./AddDealerRules";
 
@@ -42,12 +44,6 @@ export const Modaltypes = ({
   handleCancel,
   confirmLoading,
 }: ModaltypesProps) => {
-  const statusVerb: Record<string, string> = {
-    approved: "approve",
-    rejected: "reject",
-    blacklisted: "blacklist",
-  };
-
   return (
     <Modal
       open={isModalOpen.isVisible}
@@ -119,9 +115,7 @@ export const AddDealerModal = ({
   return (
     <Modal
       open={open}
-      title={
-        <span style={{ fontSize: "20px", fontWeight: 500 }}>Add Dealer</span>
-      }
+      title={<span className="add-dealer-title">Add Dealer</span>}
       onCancel={() => setOpen(false)}
       footer={[
         <Button
@@ -141,7 +135,7 @@ export const AddDealerModal = ({
         form={form}
         layout="vertical"
         onFinish={handleSubmit}
-        style={{ fontSize: "14px", fontWeight: 400 }}
+        className="add-dealer-form"
       >
         <Form.Item
           label="Dealer Name"
@@ -182,11 +176,7 @@ export const AddDealerModal = ({
         >
           <Input placeholder="Enter Contact Person" />
         </Form.Item>
-        <h5
-          style={{ paddingBottom: "15px", fontSize: "16px", fontWeight: 500 }}
-        >
-          login Info
-        </h5>
+        <h5 className="add-login-info">login Info</h5>
         <Form.Item
           label="WhatsApp No."
           name="whatsappNumber"

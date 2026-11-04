@@ -267,7 +267,6 @@ export const columns: TableProps["columns"] = [
     dataIndex: "status",
     render: (status: string) => (
       <Tag
-        className="status-tag"
         color={
           {
             Inactive: "error",
