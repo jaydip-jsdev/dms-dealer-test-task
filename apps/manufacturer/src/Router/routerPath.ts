@@ -13,6 +13,7 @@ export const MODULE_PATHS = {
   GRADELIST: "/grade/grade-list",
   SUBGRADELIST: "/sub-grade/sub-grade-list",
   PAYMENTTERMSLIST: "/payment-terms/payment-terms-list",
+  DEALERMANAGEMENT: "/DealerManagement/dealer-management",
 };
 
 export const AUTH_PATHS = {

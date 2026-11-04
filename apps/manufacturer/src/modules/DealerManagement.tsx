@@ -1,10 +1,7 @@
-import DealerList from "./DealerMamagement/DealerList"
-
+import DealerList from "./DealerManagement/DealerList";
 
 const DealerManagement = () => {
-  return (
-    <DealerList/>
-  )
-}
+  return <DealerList />;
+};
 
-export default DealerManagement
+export default DealerManagement;

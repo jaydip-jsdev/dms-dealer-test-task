@@ -1,6 +1,7 @@
 import companyIcon from "../../assets/sidebarIcons/companyIcon.png";
 import complaintManagementIcon from "../../assets/sidebarIcons/complaintManagementIcon.png";
 import dashboardIcon from "../../assets/sidebarIcons/dashboardIcon.png";
+import dealerManagementIcon from "../../assets/sidebarIcons/dealerManagementIcon.png";
 import deliveryIcon from "../../assets/sidebarIcons/deliveryIcon.png";
 import designIcon from "../../assets/sidebarIcons/designIcon.png";
 import gradeIcon from "../../assets/sidebarIcons/gradeIcon.png";
@@ -31,6 +32,12 @@ export const menuConfig = [
     icon: itemManagementIcon,
     alt: "ItemIcon",
     label: "Item Management",
+  },
+  {
+    key: PATH.DEALERMANAGEMENT,
+    icon: dealerManagementIcon,
+    alt: "dealerManagementIcon",
+    label: "Dealer Management",
   },
   {
     key: PATH.COMPLAINTMANAGEMENT,

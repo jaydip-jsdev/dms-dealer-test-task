@@ -108,7 +108,17 @@ export interface TableCompoProps<T> {
     filters: unknown,
     sorter: SorterResult<T> | SorterResult<T>[],
   ) => void;
-  loadData?: () => void;
+  loadData?: (
+    page: number,
+    limit: number,
+    search: string,
+    status: string,
+  ) => Promise<void>;
+
+  handleUpdateStatus: (
+    id: number,
+    payload: DealerUpdateStatusPayload,
+  ) => Promise<boolean>;
 }
 
 export type SubscriptionsDealersType = {
