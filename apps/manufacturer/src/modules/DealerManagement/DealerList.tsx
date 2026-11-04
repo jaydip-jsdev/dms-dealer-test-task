@@ -72,9 +72,14 @@ const DealerList = () => {
         }));
       } catch (err: unknown) {
         if (isAxiosError<ApiErrorResponse>(err)) {
-          const error = err;
-          message.error(error.response?.data.message ?? error.message);
+          message.error(err.response?.data?.message ?? err.message);
+        } else if (err instanceof Error) {
+          message.error(err.message);
+        } else {
+          message.error("Something went wrong");
         }
+
+        return false;
       } finally {
         setLoading(false);
       }
@@ -98,12 +103,15 @@ const DealerList = () => {
   ): Promise<boolean> => {
     try {
       await updateDealerStatusById(id, payload);
-      await loadData({
+      const isRefreshed = await loadData({
         page: current,
         limit: pageSize,
         search: searchText,
         status: Filter ?? "",
       });
+      if (!isRefreshed) {
+        return false;
+      }
       message.success("Dealer status updated successfully");
       return true;
     } catch (err: unknown) {
@@ -215,14 +223,14 @@ const DealerList = () => {
       <AddDealerModal
         open={Addbtn}
         setOpen={setAddbtn}
-        onAdded={() =>
-          loadData({
+        onAdded={async () => {
+          await loadData({
             page: current,
             limit: pageSize,
             search: searchText,
             status: Filter ?? "",
-          })
-        }
+          });
+        }}
       />
     </Flex>
   );
