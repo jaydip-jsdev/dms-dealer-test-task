@@ -55,7 +55,12 @@ const DealerList = () => {
   const { current = 1, pageSize = 10 } = pagination;
 
   const loadData = useCallback(
-    async ({ page, limit, search, status }: DealerPaginationResponse) => {
+    async ({
+      page,
+      limit,
+      search,
+      status,
+    }: DealerPaginationResponse): Promise<boolean> => {
       setLoading(true);
       try {
         const response = await fetchAllDealers({
@@ -70,6 +75,7 @@ const DealerList = () => {
           current: page,
           total: response?.meta?.total,
         }));
+        return true;
       } catch (err: unknown) {
         if (isAxiosError<ApiErrorResponse>(err)) {
           message.error(err.response?.data?.message ?? err.message);
